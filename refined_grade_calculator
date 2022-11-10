@@ -1,0 +1,58 @@
+import copy
+def grade_calculator(grades):
+    weighting_system_1 = {}
+    weighting_system_2 = {}
+    grades_copy = copy.deepcopy(grades)
+    
+    weighting_system_1['exam 1'] = grades_copy['exam 1'] * 0.07
+    weighting_system_1['exam 2'] = grades_copy['exam 2'] * 0.12
+    weighting_system_1['final exam'] = grades_copy['final exam'] * 0.17
+    grades_copy['homework'].sort()
+    weighting_system_1['homework'] = (sum(grades_copy['homework'][2:])) / (len(grades_copy['homework']) - 2) * 0.13
+    weighting_system_1['project 1'] = sum(grades_copy['project 1']) / len(grades_copy['project 1']) * 0.18
+    weighting_system_1['project 2'] = sum(grades_copy['project 2']) / len(grades_copy['project 2']) * 0.23
+    grades_copy['quizzes'].sort()
+    weighting_system_1['quizzes'] = (sum(grades_copy['quizzes'][2:])) / (len(grades_copy['quizzes']) - 2) * 0.05
+    weighting_system_1['attendance'] = grades_copy['attendance'] * 0.05
+    weighting_system_1['total'] = weighting_system_1['exam 1'] + weighting_system_1['exam 2'] + weighting_system_1['final exam'] + weighting_system_1['homework'] + weighting_system_1['project 1'] + weighting_system_1['project 2'] + weighting_system_1['quizzes'] + weighting_system_1['attendance']
+
+
+    weighting_system_2['exam 1'] = grades_copy['exam 1'] * 0.13
+    weighting_system_2['exam 2'] = grades_copy['exam 2'] * 0.17
+    weighting_system_2['final exam'] = grades_copy['final exam'] * 0.23
+    grades_copy['homework'].sort()
+    weighting_system_2['homework'] = (sum(grades_copy['homework'][2:])) / (len(grades_copy['homework']) - 2) * 0.07
+    weighting_system_2['project 1'] = sum(grades_copy['project 1']) / len(grades_copy['project 1']) * 0.12
+    weighting_system_2['project 2'] = sum(grades_copy['project 2']) / len(grades_copy['project 2']) * 0.17
+    grades_copy['quizzes'].sort()
+    weighting_system_2['quizzes'] = (sum(grades_copy['quizzes'][2:])) / (len(grades_copy['quizzes']) - 2) * 0.05
+    weighting_system_2['attendance'] = grades_copy['attendance'] * 0.05
+    weighting_system_2['total'] = weighting_system_2['exam 1'] + weighting_system_2['exam 2'] + weighting_system_2['final exam'] + weighting_system_2['homework'] + weighting_system_2['project 1'] + weighting_system_2['project 2'] + weighting_system_2['quizzes'] + weighting_system_2['attendance']
+
+    if weighting_system_1['total'] >= weighting_system_2['total']:
+        best_weighting_system = weighting_system_1['total']
+    else:
+        best_weighting_system = weighting_system_2['total']
+
+    if best_weighting_system >= 90 and best_weighting_system <= 125:
+        grade = 'A'
+    elif best_weighting_system >= 85 and best_weighting_system <= 90:
+        grade = 'A-'
+    elif best_weighting_system >= 80 and best_weighting_system <= 85:
+        grade = 'B+'
+    elif best_weighting_system >= 75 and best_weighting_system <= 80:
+        grade = 'B'
+    elif best_weighting_system >= 70 and best_weighting_system <= 75:
+        grade = 'B-'
+    elif best_weighting_system >= 65 and best_weighting_system <= 70:
+        grade = 'C+'
+    elif best_weighting_system >= 60 and best_weighting_system <= 65:
+        grade = 'C'
+    elif best_weighting_system >= 55 and best_weighting_system <= 60:
+        grade = 'C-'
+    elif best_weighting_system >= 50 and best_weighting_system <= 55:
+        grade = 'D'
+    elif best_weighting_system >= 0 and best_weighting_system <= 50:
+        grade = 'E'
+    
+    return grade
